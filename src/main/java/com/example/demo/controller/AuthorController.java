@@ -31,6 +31,8 @@ public class AuthorController {
     @GetMapping("/addauthor")
     public String authorForm(Model model){
         model.addAttribute("author", new Author());
+        model.addAttribute("authors", authorRepository.findAll());
+        model.addAttribute("books", bookRepository.findAll());
         return "authorform";
     }
 
