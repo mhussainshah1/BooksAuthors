@@ -16,6 +16,7 @@ public class Book {
     private long id;
 
     @NonNull
+    @Size(min = 4)
     private String SKU;
 
     @NonNull
