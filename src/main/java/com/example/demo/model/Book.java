@@ -42,6 +42,7 @@ public class Book {
     }
 
     public Book(String SKU, @Size(min = 4) String title, @Size(min = 10) String description, @Min(0) double price, boolean isInStock) {
+        this();
         this.SKU = SKU;
         this.title = title;
         this.description = description;

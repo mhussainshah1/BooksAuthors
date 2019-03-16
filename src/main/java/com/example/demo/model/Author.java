@@ -25,6 +25,7 @@ public class Author {
     }
 
     public Author(@Size(min = 3) String name) {
+        this();
         this.name = name;
     }
 

@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -22,7 +20,7 @@ public class AuthorController {
     AuthorRepository authorRepository;
 
     @RequestMapping("/authorlist")
-    public String listCourses(Model model) {
+    public String listAuthors(Model model) {
         model.addAttribute("authors", authorRepository.findAll());
         model.addAttribute("books", bookRepository.findAll()); //generate select * statement
         return "authorlist";
@@ -37,7 +35,7 @@ public class AuthorController {
     }
 
     @PostMapping("/processauthor")
-    public String processSubject(@Valid Author author, BindingResult result,
+    public String processAuthor(@Valid Author author, BindingResult result,
                                  Model model){
         if(result.hasErrors()){
             return "authorform";
@@ -48,6 +46,33 @@ public class AuthorController {
             return "authorform";
         }
         authorRepository.save(author);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/detailauthor/{id}")
+    public String showAuthor(@PathVariable("id") long id, Model model) {
+        model.addAttribute("author", authorRepository.findById(id).get());
+        return "show";
+    }
+
+    @RequestMapping("/updateauthor/{id}")
+    public String updateAuthor(@PathVariable("id") long id, Model model) {
+        model.addAttribute("author", authorRepository.findById(id).get());
+        model.addAttribute("books", bookRepository.findAll());
+        return "bookform";
+    }
+
+    @RequestMapping("/deleteauthor/{id}")
+    public String deleteAuthor(@PathVariable("id") long id){
+        authorRepository.deleteById(id);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/deleteauthor")
+    public String deleteAuthors(@RequestParam("check") long[] ids){
+        for(long id : ids){
+            authorRepository.deleteById(id);
+        }
         return "redirect:/";
     }
 }
