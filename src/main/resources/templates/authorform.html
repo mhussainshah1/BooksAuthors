@@ -9,6 +9,27 @@
 <body>
 <div th:replace="base::nav"></div>
 
+<div class="container">
+    <div class="jumbotron">
+        <h2 align="center">Author Form</h2>
+    </div>
+    <form action="#" th:action="@{/processauthor}" th:object="${author}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group row">
+            <label for="title">Title :</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{name}" class="form-control" id="title" placeholder="Author's Name">
+            </div>
+             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br />
+            <span th:text="${message}"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
 <div th:replace="base::footer"></div>
 </body>
 </html>

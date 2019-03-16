@@ -1,5 +1,8 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.model.AuthorRepository;
+import com.example.demo.model.Book;
+import com.example.demo.model.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,11 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Iterator;
-import java.util.List;
 
 @Controller
-public class HomeController {
+public class BookController {
     @Autowired
     BookRepository bookRepository;
 
@@ -28,12 +29,14 @@ public class HomeController {
     @GetMapping("/add")
     public String bookForm(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("authors", authorRepository.findAll());
         return "bookform";
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid Book book, BindingResult result) {
+    public String processForm(@Valid Book book, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("authors", authorRepository.findAll());
             return "bookform";
         }
         bookRepository.save(book);//generate SQL statement and insert into database
@@ -49,17 +52,18 @@ public class HomeController {
     @RequestMapping("/update/{id}")
     public String updateBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("book", bookRepository.findById(id).get());
+        model.addAttribute("authors", authorRepository.findAll());
         return "bookform";
     }
 
     @RequestMapping("/delete/{id}")
-    public String delBook(@PathVariable("id") long id){
+    public String deleteBook(@PathVariable("id") long id){
         bookRepository.deleteById(id);
         return "redirect:/";
     }
 
     @RequestMapping("/delete")
-    public String delBooks(@RequestParam("check") long[] ids){
+    public String deleteBooks(@RequestParam("check") long[] ids){
         for(long id : ids){
             bookRepository.deleteById(id);
         }

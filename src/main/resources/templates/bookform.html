@@ -16,34 +16,58 @@
         <input th:field="*{id}" type="hidden"/>
         <table>
             <tr>
+                <td><label for="author">Author:</label></td>
+                <td>
+                    <select class="form-control input-md"
+                            id="author" multiple
+                            th:field="*{authors}">
+                        <option th:each="option: ${authors}"
+                                th:value="${option.id}">[[${option.name}]]
+                        </option>
+                    </select>
+                </td>
+                <td><span th:errors="*{authors}" th:if="${#fields.hasErrors('authors')}"></span></td>
+            </tr>
+            <tr>
                 <td><label for="sku">SKU:</label></td>
-                <td><input id="sku" name="sku" th:field="*{SKU}" type="text"/></td>
+                <td><input class="form-control input-md"
+                           id="sku" name="sku"
+                           th:field="*{SKU}"
+                           type="text"/></td>
                 <td><span th:errors="*{SKU}" th:if="${#fields.hasErrors('SKU')}"></span></td>
             </tr>
             <tr>
                 <td><label for="title">Title:</label></td>
-                <td><input id="title" name="title" th:field="*{title}" type="text"/></td>
+                <td><input class="form-control input-md"
+                           id="title" name="title"
+                           th:field="*{title}"
+                           type="text"/></td>
                 <td><span th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></span></td>
             </tr>
             <tr>
-                <td><label for="instructor"> Instructor:</label></td>
-                <td><input id="instructor" name="instructor" th:field="*{authors}" type="text"/></td>
-                <td><span th:errors="*{authors}" th:if="${#fields.hasErrors('authors')}"></span></td>
-            </tr>
-            <tr>
                 <td><label for="description"> Description:</label></td>
-                <td><textarea id="description" name="description" cols="20" rows="4" th:field="*{description}"></textarea></td>
+                <td><textarea class="form-control input-md"
+                              cols="20" id="description"
+                              name="description"
+                              rows="4"
+                              th:field="*{description}"></textarea></td>
                 <td><span th:errors="*{description}" th:if="${#fields.hasErrors('description')}"></span></td>
             </tr>
             <tr>
                 <td><label for="price"> Price:</label></td>
-                <td><input id="price" name="price" th:field="*{price}" type="number"/></td>
+                <td><input class="form-control input-md"
+                           id="price"
+                           name="price"
+                           th:field="*{price}" type="number"/></td>
                 <td><span th:errors="*{price}" th:if="${#fields.hasErrors('price')}"></span></td>
             </tr>
             <tr>
-                <td></td>
-                <td><input id="stock" name="stock" th:field="*{inStock}" type="checkbox"/>
-                <label for="stock"> In Stock:</label></td>
+                <td><label for="stock"> In Stock:</label></td>
+                <td><input align="left"
+                           class="form-control"
+                           id="stock"
+                           name="stock"
+                           th:field="*{inStock}" type="checkbox"/></td>
                 <td><span th:errors="*{inStock}" th:if="${#fields.hasErrors('inStock')}"></span></td>
             </tr>
         </table>

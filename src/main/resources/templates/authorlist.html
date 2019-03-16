@@ -9,6 +9,46 @@
 <body>
 <div th:replace="base::nav"></div>
 
+<div class="container-float">
+    <form action="#" th:action= "@{/deleteauthor}" method="post">
+        <div class="jumbotron">
+            <h2 align="center">Authors List</h2>
+        </div>
+        <input type="submit" class="btn btn-link" value="Delete">
+        <table class="table">
+            <tr>
+                <th>Select</th>
+                <th>Author</th>
+                <th>Books</th>
+                <th>To Do</th>
+            </tr>
+            <tr th:each="author:${authors}">
+                <td>
+                    <input type="checkbox" name="check" th:value="${author.id}"/>
+                </td>
+                <td>
+                    <a th:href="@{/detail/{id}(id=${author.id})}">[[${author.name}]]</a>
+                </td>
+                <td>
+                    <span th:text="${#lists.size(author.books)>0}?'':'No books'"></span>
+                    <div th:each="eachBook:${author.books}">
+                        <p th:text="${eachBook.title}"></p>
+                    </div>
+                </td>
+                <td>
+                    <a th:href="@{/update/{id}(id=${author.id})}">Edit</a>-
+                    <a th:href="@{/delete/{id}(id=${author.id})}">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+<div class="container">
+
+</div>
+
 <div th:replace="base::footer"></div>
 </body>
 </html>

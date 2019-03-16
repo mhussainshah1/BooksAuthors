@@ -8,9 +8,8 @@
 
 <body>
 <div th:replace="base::nav"></div>
+
 <div class="container-float">
-
-
     <form action="#" th:action= "@{/delete}" method="post">
         <div class="jumbotron">
             <h2 align="center">Book List</h2>
@@ -36,14 +35,10 @@
                     <a th:href="@{/detail/{id}(id=${book.id})}">[[${book.title}]]</a>
                 </td>
                 <td>
-                <!--<span th:inline="${book.authors}"></span>-->
-                <div th:each="author:${authors}">
-                    <h2 th:text="${author.name}"></h2>
-                    <h3 th:text="${#lists.size(author.books)>0}?'My Books':'No Book for me'"></h3>
-                    <div th:each="eachBook:${author.books}">
-                        <p th:text="${eachBook.title}"></p>
+                    <span th:text="${#lists.size(book.authors)>0}?'':'No Author'"></span>
+                    <div th:each="eachAuthor:${book.authors}">
+                        <span th:text="${eachAuthor.name}"></span>
                     </div>
-                </div>
                 </td>
                 <td th:text = "${book.description}"></td>
                 <td th:text = "${book.price}"></td>
