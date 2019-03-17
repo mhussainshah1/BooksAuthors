@@ -29,7 +29,6 @@ public class BookController {
     @GetMapping("/add")
     public String bookForm(Model model) {
         model.addAttribute("book", new Book());
-        model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("authors", authorRepository.findAll());
         return "bookform";
     }
@@ -48,7 +47,6 @@ public class BookController {
     public String showBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("book", bookRepository.findById(id).get());
         model.addAttribute("authors", authorRepository.findAll());
-        model.addAttribute("books", bookRepository.findAll());
         return "show";
     }
 
@@ -76,7 +74,6 @@ public class BookController {
     @GetMapping("/about")
     public String getAbout(Model model) {
         model.addAttribute("authors", authorRepository.findAll());
-        model.addAttribute("books", bookRepository.findAll());
         return "about";
     }
 }
