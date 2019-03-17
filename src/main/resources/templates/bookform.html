@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="base::header"></div>
+    <title>Book Form</title>
+
+</head>
+
+<body>
+<div th:replace="base::nav"></div>
+<div align="center" class="container">
+    <div class="jumbotron">
+        <h2>Book Form</h2>
+    </div>
+
+    <form action="#" method="post" th:action="@{/process}" th:object="${book}">
+        <input th:field="*{id}" type="hidden"/>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="author">Author:</label>
+            <div class="col-sm-10">
+                <select class="form-control"
+                        id="author" multiple
+                        th:field="*{authors}">
+                    <option th:each="option: ${authors}"
+                            th:value="${option.id}">[[${option.name}]]
+                    </option>
+                </select>
+            </div>
+            <span th:errors="*{authors}" th:if="${#fields.hasErrors('authors')}"></span>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="sku">SKU:</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="sku" name="sku" placeholder="SKU" th:field="*{SKU}" type="text"/>
+            </div>
+            <span th:errors="*{SKU}" th:if="${#fields.hasErrors('SKU')}"></span>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="title">Title:</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="title" name="title" placeholder="Book's Title" th:field="*{title}"
+                       type="text"/>
+            </div>
+            <span th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></span>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="description"> Description:</label>
+            <div class="col-sm-10">
+                <textarea class="form-control input-md"
+                          id="description"
+                          name="description"
+                          placeholder="Description"
+                          rows="4"
+                          th:field="*{description}"></textarea>
+            </div>
+            <span th:errors="*{description}" th:if="${#fields.hasErrors('description')}"></span>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="price"> Price:</label>
+            <div class="col-sm-10">
+                <input class="form-control"
+                       id="price"
+                       name="price"
+                       placeholder="Price"
+                       th:field="*{price}"
+                       type="number"/>
+            </div>
+            <span th:errors="*{price}" th:if="${#fields.hasErrors('price')}"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">In Stock:</div>
+            <div class="col-sm-10">
+                <div align="left" class="form-check">
+                    <input class="form-check-input" id="stock" name="stock" th:field="*{inStock}" type="checkbox"/>
+                    <label class="form-check-label" for="stock"> </label>
+                </div>
+            </div>
+            <div>
+                <span th:errors="*{inStock}" th:if="${#fields.hasErrors('inStock')}"></span>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+<div th:replace="base::footer"></div>
+</body>
+</html>
