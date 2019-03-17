@@ -47,6 +47,8 @@ public class BookController {
     @RequestMapping("/detail/{id}")
     public String showBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("book", bookRepository.findById(id).get());
+        model.addAttribute("authors", authorRepository.findAll());
+        model.addAttribute("books", bookRepository.findAll());
         return "show";
     }
 

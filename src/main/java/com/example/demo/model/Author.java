@@ -55,10 +55,13 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", books=" + books +
-                '}';
+        String string = "Author{" +
+                        "id=" + id +
+                        ", name='" + name + '\'';
+        for(Book book : books){
+            string += book.getTitle() + ',';
+        }
+        string  += "}";
+        return string;
     }
 }

@@ -17,7 +17,7 @@
             <td><span th:text="${book.title}"></span><br/></td>
         </tr>
         <tr>
-            <td>Author:</td>
+            <td>Author(S):</td>
             <td>
                 <span th:text="${#lists.size(book.authors)>0}?'':'No Author'"></span>
                 <div th:each="eachAuthor:${book.authors}">

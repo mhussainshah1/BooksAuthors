@@ -27,7 +27,7 @@
                     <input type="checkbox" name="check" th:value="${author.id}"/>
                 </td>
                 <td>
-                    <a th:href="@{/detail/{id}(id=${author.id})}">[[${author.name}]]</a>
+                    <a th:href="@{/detailauthor/{id}(id=${author.id})}">[[${author.name}]]</a>
                 </td>
                 <td>
                     <span th:text="${#lists.size(author.books)>0}?'':'No books'"></span>
@@ -36,8 +36,8 @@
                     </div>
                 </td>
                 <td>
-                    <a th:href="@{/update/{id}(id=${author.id})}">Edit</a>-
-                    <a th:href="@{/delete/{id}(id=${author.id})}">Delete</a>
+                    <a th:href="@{/updateauthor/{id}(id=${author.id})}">Edit</a>-
+                    <a th:href="@{/deleteauthor/{id}(id=${author.id})}">Delete</a>
                 </td>
             </tr>
         </table>
