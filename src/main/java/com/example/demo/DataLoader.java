@@ -44,10 +44,14 @@ public class DataLoader implements CommandLineRunner {
         //one author two books
         author = new Author("Jeanne Boyarsky");
         Set<Book> books = new HashSet<>();
-        Book book1 = new Book("Orcl1003", "OCA: Oracle 8 Certified Associate Java SE", "One author two books : - Everything you need to know in one place", 45.00, true);
+        Book book1 = new Book("Orcl1003",
+                "OCA 8: Oracle Certified Associate Java Programmer",
+                "One author two books : - Everything you need to know in OCA exam",
+                45.00,
+                true);
         book1.getAuthors().add(author);
         books.add(book1);
-        Book book2 = new Book("Orcl1004", "OCP: Oracle 8 Certified Professional Java SE", "One author two books : - Everything you need to know in one place", 45.00, true);
+        Book book2 = new Book("Orcl1004", "OCP 8: Oracle Certified Professional Java SE", "One author two books : - Everything you need to know in OCP exam", 45.00, true);
         book2.getAuthors().add(author);
         books.add(book2);
         author.setBooks(books);

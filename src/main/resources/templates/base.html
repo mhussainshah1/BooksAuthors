@@ -48,7 +48,7 @@
                 <div aria-labelledby="navbarDropdown" class="dropdown-menu">
                         <span th:each="book: ${books}"
                               th:value="${book.id}">
-                             <a class="dropdown-item" th:href="@{/detailbook/{id}(id=${book.id})}">[[${book.title}]]</a>
+                             <a class="dropdown-item" th:href="@{/detail/{id}(id=${book.id})}">[[${book.title}]]</a>
                         </span>
                 </div>
             </li>

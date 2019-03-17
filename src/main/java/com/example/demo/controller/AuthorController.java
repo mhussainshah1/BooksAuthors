@@ -46,26 +46,26 @@ public class AuthorController {
             return "authorform";
         }
         authorRepository.save(author);
-        return "redirect:/";
+        return "redirect:/authorlist";
     }
 
     @RequestMapping("/detailauthor/{id}")
     public String showAuthor(@PathVariable("id") long id, Model model) {
         model.addAttribute("author", authorRepository.findById(id).get());
-        return "show";
+        return "showauthor";
     }
 
     @RequestMapping("/updateauthor/{id}")
     public String updateAuthor(@PathVariable("id") long id, Model model) {
         model.addAttribute("author", authorRepository.findById(id).get());
         model.addAttribute("books", bookRepository.findAll());
-        return "bookform";
+        return "authorform";
     }
 
     @RequestMapping("/deleteauthor/{id}")
     public String deleteAuthor(@PathVariable("id") long id){
         authorRepository.deleteById(id);
-        return "redirect:/";
+        return "redirect:/authorlist";
     }
 
     @RequestMapping("/deleteauthor")
@@ -73,6 +73,6 @@ public class AuthorController {
         for(long id : ids){
             authorRepository.deleteById(id);
         }
-        return "redirect:/";
+        return "redirect:/authorlist";
     }
 }

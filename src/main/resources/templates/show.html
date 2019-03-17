@@ -18,7 +18,12 @@
         </tr>
         <tr>
             <td>Author:</td>
-            <td><span th:text="${book.authors}"></span></td>
+            <td>
+                <span th:text="${#lists.size(book.authors)>0}?'':'No Author'"></span>
+                <div th:each="eachAuthor:${book.authors}">
+                    <span th:text="${eachAuthor.name}"></span>
+                </div>
+            </td>
         </tr>
         <tr>
             <td>Description:</td>
