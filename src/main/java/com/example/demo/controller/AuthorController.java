@@ -22,15 +22,13 @@ public class AuthorController {
     @RequestMapping("/authorlist")
     public String listAuthors(Model model) {
         model.addAttribute("authors", authorRepository.findAll());
-        model.addAttribute("books", bookRepository.findAll()); //generate select * statement
-        return "authorlist";
+        return "authorslist";
     }
 
     @GetMapping("/addauthor")
     public String authorForm(Model model){
         model.addAttribute("author", new Author());
         model.addAttribute("authors", authorRepository.findAll());
-        model.addAttribute("books", bookRepository.findAll());
         return "authorform";
     }
 
@@ -53,14 +51,13 @@ public class AuthorController {
     public String showAuthor(@PathVariable("id") long id, Model model) {
         model.addAttribute("author", authorRepository.findById(id).get());
         model.addAttribute("authors", authorRepository.findAll());
-        model.addAttribute("books", bookRepository.findAll());
-        return "showauthor";
+        model.addAttribute("authorbooks", bookRepository.findAllByAuthors_Id(id));
+        return "authorlist";
     }
 
     @RequestMapping("/updateauthor/{id}")
     public String updateAuthor(@PathVariable("id") long id, Model model) {
         model.addAttribute("author", authorRepository.findById(id).get());
-        model.addAttribute("books", bookRepository.findAll());
         return "authorform";
     }
 

@@ -51,7 +51,7 @@ public class DataLoader implements CommandLineRunner {
                 true);
         book1.getAuthors().add(author);
         books.add(book1);
-        Book book2 = new Book("Orcl1004", "OCP 8: Oracle Certified Professional Java SE", "One author two books : - Everything you need to know in OCP exam", 45.00, true);
+        Book book2 = new Book("Orcl1004", "OCP 8: Oracle Certified Professional Java Programmer", "One author two books : - Everything you need to know in OCP exam", 45.00, true);
         book2.getAuthors().add(author);
         books.add(book2);
         author.setBooks(books);
