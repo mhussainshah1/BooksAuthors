@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.AuthorRepository;
-import com.example.demo.model.Book;
-import com.example.demo.model.BookRepository;
+import com.example.demo.model.*;
+import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +18,14 @@ public class BookController {
     @Autowired
     AuthorRepository authorRepository;
 
+    @Autowired
+    BooksAuthorsRepository booksAuthorsRepository;
+
     @RequestMapping("/")
     public String listCourses(Model model) {
         model.addAttribute("authors", authorRepository.findAll());
         model.addAttribute("books", bookRepository.findAll()); //generate select * statement
+        model.addAttribute("booksauthors",booksAuthorsRepository);
         return "list";
     }
 
@@ -34,12 +37,22 @@ public class BookController {
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid Book book, BindingResult result, Model model) {
+    public String processForm(@Valid @ModelAttribute("book") Book book,
+                              BindingResult result,
+                              @RequestParam("booksauthors") long[] ids,
+                              Model model) {
         if (result.hasErrors()) {
             model.addAttribute("authors", authorRepository.findAll());
             return "bookform";
         }
-        bookRepository.save(book);//generate SQL statement and insert into database
+
+        for(long id : ids){
+            Author author = authorRepository.findById(id).get();
+            BooksAuthors booksAuthors = new BooksAuthors(book,author);
+            bookRepository.save(book);//generate SQL statement and insert into database
+            booksAuthorsRepository.save(booksAuthors);
+        }
+
         return "redirect:/";
     }
 

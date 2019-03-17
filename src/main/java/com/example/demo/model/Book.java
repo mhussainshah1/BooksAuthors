@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.model.Author;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -34,14 +33,14 @@ public class Book {
     @NonNull
     private boolean isInStock;
 
-    @ManyToMany
-    private Set<Author> authors;
+    @OneToMany(mappedBy = "author")
+    private Set<BooksAuthors> booksAuthors;
 
     public Book() {
-        authors = new HashSet<>();
+        booksAuthors = new HashSet<>();
     }
 
-    public Book(String SKU, @Size(min = 4) String title, @Size(min = 10) String description, @Min(0) double price, boolean isInStock) {
+    public Book(@Size(min = 4) String SKU, @Size(min = 4) String title, @Size(min = 10) String description, @Min(0) double price, boolean isInStock) {
         this();
         this.SKU = SKU;
         this.title = title;
@@ -56,6 +55,14 @@ public class Book {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getSKU() {
+        return SKU;
+    }
+
+    public void setSKU(String SKU) {
+        this.SKU = SKU;
     }
 
     public String getTitle() {
@@ -90,20 +97,12 @@ public class Book {
         isInStock = inStock;
     }
 
-    public String getSKU() {
-        return SKU;
+    public Set<BooksAuthors> getBooksAuthors() {
+        return booksAuthors;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
-    }
-
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
+    public void setBooksAuthors(Set<BooksAuthors> booksAuthors) {
+        this.booksAuthors = booksAuthors;
     }
 
     @Override
@@ -115,7 +114,7 @@ public class Book {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", isInStock=" + isInStock +
-                ", authors=" + authors +
+                ", booksAuthors=" + booksAuthors +
                 '}';
     }
 }

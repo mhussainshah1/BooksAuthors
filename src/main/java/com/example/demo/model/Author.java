@@ -17,11 +17,11 @@ public class Author {
     @Size(min = 3)
     private String name;
 
-    @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    @OneToMany(mappedBy = "book")
+    private Set<BooksAuthors> booksAuthors;
 
     public Author() {
-        books = new HashSet<>();
+        booksAuthors = new HashSet<>();
     }
 
     public Author(@Size(min = 3) String name) {
@@ -45,23 +45,20 @@ public class Author {
         this.name = name;
     }
 
-    public Set<Book> getBooks() {
-        return books;
+    public Set<BooksAuthors> getBooksAuthors() {
+        return booksAuthors;
     }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
+    public void setBooksAuthors(Set<BooksAuthors> booksAuthors) {
+        this.booksAuthors = booksAuthors;
     }
 
     @Override
     public String toString() {
-        String string = "Author{" +
-                        "id=" + id +
-                        ", name='" + name + '\'';
-        for(Book book : books){
-            string += book.getTitle() + ',';
-        }
-        string  += "}";
-        return string;
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", booksAuthors=" + booksAuthors +
+                '}';
     }
 }

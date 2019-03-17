@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Author;
-import com.example.demo.model.AuthorRepository;
-import com.example.demo.model.BookRepository;
+import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +16,9 @@ public class AuthorController {
 
     @Autowired
     AuthorRepository authorRepository;
+
+    @Autowired
+    BooksAuthorsRepository booksAuthorsRepository;
 
     @RequestMapping("/authorlist")
     public String listAuthors(Model model) {
@@ -51,7 +52,7 @@ public class AuthorController {
     public String showAuthor(@PathVariable("id") long id, Model model) {
         model.addAttribute("author", authorRepository.findById(id).get());
         model.addAttribute("authors", authorRepository.findAll());
-        model.addAttribute("authorbooks", bookRepository.findAllByAuthors_Id(id));
+        model.addAttribute("authorbooks", booksAuthorsRepository.findAllByAuthor_Id(id));
         return "authorlist";
     }
 
