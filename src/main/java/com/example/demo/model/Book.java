@@ -33,7 +33,7 @@ public class Book {
     @NonNull
     private boolean isInStock;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BooksAuthors> booksAuthors;
 
     public Book() {

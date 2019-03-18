@@ -30,9 +30,9 @@
                     <a th:href="@{/detailauthor/{id}(id=${author.id})}">[[${author.name}]]</a>
                 </td>
                 <td>
-                    <span th:text="${#lists.size(author.books)>0}?'':'No books'"></span>
-                    <div th:each="eachBook:${author.books}">
-                        <p th:text="${eachBook.title}"></p>
+                    <span th:text="${#lists.size(booksauthors.findAllByAuthor_Id(author.id))>0}?'':'No books'"></span>
+                    <div th:each="bookAuthor:${booksauthors.findAllByAuthor_Id(author.id)}">
+                        <p th:text="${bookAuthor.book.title}"></p>
                     </div>
                 </td>
                 <td>

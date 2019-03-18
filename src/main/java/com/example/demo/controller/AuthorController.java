@@ -23,6 +23,7 @@ public class AuthorController {
     @RequestMapping("/authorlist")
     public String listAuthors(Model model) {
         model.addAttribute("authors", authorRepository.findAll());
+        model.addAttribute("booksauthors",booksAuthorsRepository);
         return "authorslist";
     }
 

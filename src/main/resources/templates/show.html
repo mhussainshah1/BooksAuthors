@@ -19,9 +19,9 @@
         <tr>
             <td>Author(S):</td>
             <td>
-                <span th:text="${#lists.size(book.authors)>0}?'':'No Author'"></span>
-                <div th:each="eachAuthor:${book.authors}">
-                    <span th:text="${eachAuthor.name}"></span>
+                <span th:text="${#lists.size(booksauthors.findAllByBook_Id(book.id))>0}?'':'No Author'"></span>
+                <div th:each="bookAuthor:${booksauthors.findAllByBook_Id(book.id)}">
+                    <span th:text="${bookAuthor.author.name}"></span>
                 </div>
             </td>
         </tr>

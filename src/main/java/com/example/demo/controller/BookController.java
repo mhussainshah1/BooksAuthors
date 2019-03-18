@@ -39,7 +39,7 @@ public class BookController {
     @PostMapping("/process")
     public String processForm(@Valid @ModelAttribute("book") Book book,
                               BindingResult result,
-                              @RequestParam("booksauthors") long[] ids,
+                              @RequestParam("booksAuthors") long[] ids,
                               Model model) {
         if (result.hasErrors()) {
             model.addAttribute("authors", authorRepository.findAll());
@@ -60,6 +60,7 @@ public class BookController {
     public String showBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("book", bookRepository.findById(id).get());
         model.addAttribute("authors", authorRepository.findAll());
+        model.addAttribute("booksauthors",booksAuthorsRepository);
         return "show";
     }
 
@@ -67,6 +68,7 @@ public class BookController {
     public String updateBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("book", bookRepository.findById(id).get());
         model.addAttribute("authors", authorRepository.findAll());
+        model.addAttribute("booksAuthors",booksAuthorsRepository.findAll());
         return "bookform";
     }
 

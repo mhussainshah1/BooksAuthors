@@ -25,23 +25,23 @@
                 <th>In Stock</th>
                 <th>To Do</th>
             </tr>
-            <tr th:each="book : ${authorbooks}"><!--enhanced for loop-->
+            <tr th:each="authorbook : ${authorbooks}"><!--enhanced for loop-->
                 <td>
-                    <input type="checkbox" name="check" th:value="${book.id}"/>
+                    <input type="checkbox" name="check" th:value="${authorbook.book.id}"/>
                 </td>
-                <td th:text = "${book.SKU}"></td>
+                <td th:text = "${authorbook.book.SKU}"></td>
                 <td>
-                    <a th:href="@{/detail/{id}(id=${book.id})}">[[${book.title}]]</a>
+                    <a th:href="@{/detail/{id}(id=${authorbook.book.id})}">[[${authorbook.book.title}]]</a>
                 </td>
-                <td th:text = "${book.description}"></td>
-                <td th:text = "${book.price}"></td>
+                <td th:text = "${authorbook.book.description}"></td>
+                <td th:text = "${authorbook.book.price}"></td>
                 <td>
-                    <span th:if="${book.inStock}">Yes</span>
-                    <span th:unless="${book.inStock}">No</span>
+                    <span th:if="${authorbook.book.inStock}">Yes</span>
+                    <span th:unless="${authorbook.book.inStock}">No</span>
                 </td>
                 <td>
-                    <a th:href="@{/update/{id}(id=${book.id})}">Edit</a>-
-                    <a th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
+                    <a th:href="@{/update/{id}(id=${authorbook.book.id})}">Edit</a>-
+                    <a th:href="@{/delete/{id}(id=${authorbook.book.id})}">Delete</a>
                 </td>
             </tr>
         </table>
