@@ -68,7 +68,7 @@ public class BookController {
     public String updateBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("book", bookRepository.findById(id).get());
         model.addAttribute("authors", authorRepository.findAll());
-        model.addAttribute("booksAuthors",booksAuthorsRepository.findAll());
+        System.out.println( bookRepository.findById(id).get());
         return "bookform";
     }
 
