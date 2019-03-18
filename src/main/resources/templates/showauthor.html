@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="base::header"></div>
+    <title>Show Author</title>
+
+</head>
+
+<body>
+<div th:replace="base::nav"></div>
+<div class="container" align="center">
+    <table class ="table">
+        <tr>
+            <td>Title:</td>
+            <td><span th:text="${author.name}"></span><br/></td>
+        </tr>
+        <tr>
+            <td>Book (s):</td>
+            <td>
+                <span th:text="${#lists.size(author.books)>0}?'':'No Book'"></span>
+                <div th:each="eachBook:${author.books}">
+                    <span th:text="${eachBook.title}"></span>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/updateauthor/{id}(id=${author.id})}">Edit</a>-
+    <a th:href="@{/deleteauthor/{id}(id=${author.id})}">Delete</a>
+</div>
+<div th:replace="base::footer"></div>
+</body>
+</html>

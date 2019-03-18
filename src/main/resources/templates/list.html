@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="base::header"></div>
+    <title>List</title>
+</head>
+
+
+<body>
+<div th:replace="base::nav"></div>
+
+<div class="container-float">
+    <form action="#" th:action= "@{/delete}" method="post">
+        <div class="jumbotron">
+            <h2 align="center">Book List</h2>
+        </div>
+        <input type="submit" class="btn btn-link" value="Delete">
+        <table class="table">
+            <tr>
+                <th>Select</th>
+                <th>SKU</th>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>In Stock</th>
+                <th>To Do</th>
+            </tr>
+            <tr th:each="book : ${books}"><!--enhanced for loop-->
+                <td>
+                    <input type="checkbox" name="check" th:value="${book.id}"/>
+                </td>
+                <td th:text = "${book.SKU}"></td>
+                <td>
+                    <a th:href="@{/detail/{id}(id=${book.id})}">[[${book.title}]]</a>
+                </td>
+                <td>
+                    <span th:text="${#lists.size(booksauthors.findAllByBook_Id(book.id))>0}?'':'No Author'"></span>
+                    <div th:each="bookAuthor:${booksauthors.findAllByBook_Id(book.id)}">
+                        <span th:text="${bookAuthor.author.name}"></span>
+                    </div>
+                </td>
+                <td th:text = "${book.description}"></td>
+                <td th:text = "${book.price}"></td>
+                <td>
+                    <span th:if="${book.inStock}">Yes</span>
+                    <span th:unless="${book.inStock}">No</span>
+                </td>
+                <td>
+                    <a th:href="@{/update/{id}(id=${book.id})}">Edit</a>-
+                    <a th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div th:replace="base::footer"></div>
+</body>
+</html>
