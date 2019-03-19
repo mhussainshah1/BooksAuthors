@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.model.Author;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;

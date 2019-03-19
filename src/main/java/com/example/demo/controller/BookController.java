@@ -63,7 +63,7 @@ public class BookController {
         return "redirect:/";
     }
 
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     public String deleteBooks(@RequestParam("check") long[] ids){
         for(long id : ids){
             bookRepository.deleteById(id);
