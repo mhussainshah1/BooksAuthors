@@ -17,7 +17,7 @@ public class Author {
     @Size(min = 3)
     private String name;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "book")
     private Set<BooksAuthors> booksAuthors;
 
     public Author() {

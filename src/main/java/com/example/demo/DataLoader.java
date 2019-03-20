@@ -28,21 +28,38 @@ public class DataLoader implements CommandLineRunner {
         authorRepository.save(author);
         bookRepository.save(book);
 
-//        //Two authors one book
-//        Set<Author> authors = new HashSet<>();
-//        author = new Author("Kathy Sierra");
-//        authors.add(author);
-//        authorRepository.save(author);
-//        author = new Author("Bert Bates");
-//        authors.add(author);
-//        book = new Book("Java1001", "Head First Java","Two authors one book: - Easy to read Java workbook", 47.50, true);
-//        book.setAuthors(authors);
-//        authorRepository.save(author);
-//        bookRepository.save(book);
-//
+        //Two authors one book
+/*        book = new Book("Java1001", "Head First Java","Two authors one book: - Easy to read Java workbook", 47.50, true);
+        Author author1 = new Author("Kathy Sierra");
+        booksAuthors = new BooksAuthors(book, author1);
+        book.getBooksAuthors().add(booksAuthors);
+        authorRepository.save(author1);
+        bookRepository.save(book);
+
+        Author author2 = new Author("Bert Bates");
+        booksAuthors = new BooksAuthors(book, author2);
+        book.getBooksAuthors().add(booksAuthors);
+        authorRepository.save(author2);
+        bookRepository.save(book);*/
+
+        //Two authors one book
+        book = new Book("Java1001", "Head First Java","Two authors one book: - Easy to read Java workbook", 47.50, true);
+        Set<BooksAuthors> booksAuthorsSet = new HashSet<>();
+        Author author1 = new Author("Kathy Sierra");
+        booksAuthors = new BooksAuthors(book, author1);
+        booksAuthorsSet.add(booksAuthors);
+
+        Author author2 = new Author("Bert Bates");
+        booksAuthors = new BooksAuthors(book, author2);
+        booksAuthorsSet.add(booksAuthors);
+
+        book.setBooksAuthors(booksAuthorsSet);
+        authorRepository.save(author1);
+        authorRepository.save(author2);
+        bookRepository.save(book);
+
         //one author two books
         author = new Author("Jeanne Boyarsky");
-        Set<Book> books = new HashSet<>();
         Book book1 = new Book("Orcl1003",
                 "OCA 8: Oracle Certified Associate Java Programmer",
                 "One author two books : - Everything you need to know in OCA exam",
@@ -50,7 +67,6 @@ public class DataLoader implements CommandLineRunner {
                 true);
         booksAuthors = new BooksAuthors(book1, author);
         book1.getBooksAuthors().add(booksAuthors);
-        books.add(book1);
         Book book2 = new Book("Orcl1004",
                 "OCP 8: Oracle Certified Professional Java Programmer",
                 "One author two books : - Everything you need to know in OCP exam",
@@ -58,8 +74,6 @@ public class DataLoader implements CommandLineRunner {
                 true);
         booksAuthors = new BooksAuthors(book2, author);
         book2.getBooksAuthors().add(booksAuthors);
-        books.add(book2);
-//        author.setBooks(books);
         authorRepository.save(author);
         bookRepository.save(book1);
         bookRepository.save(book2);
