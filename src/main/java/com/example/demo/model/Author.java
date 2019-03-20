@@ -17,11 +17,12 @@ public class Author {
     @Size(min = 3)
     private String name;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "book")
     private Set<BooksAuthors> booksAuthors;
 
     public Author() {
         booksAuthors = new HashSet<>();
+
     }
 
     public Author(@Size(min = 3) String name) {
@@ -60,5 +61,12 @@ public class Author {
                 ", name='" + name + '\'' +
                 ", booksAuthors=" + booksAuthors +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Author author = (Author) o;
+        return id == author.id &&
+                name.equals(author.name);
     }
 }

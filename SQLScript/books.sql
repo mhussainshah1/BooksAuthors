@@ -5,6 +5,6 @@ use books;
 -- delete all data in a table
 -- truncate table book;
 
-SELECT * FROM books.author;
-SELECT * FROM books.book;
-SELECT * FROM books.book_authors;
+SELECT * FROM author;
+SELECT * FROM book;
+SELECT * FROM books_authors;

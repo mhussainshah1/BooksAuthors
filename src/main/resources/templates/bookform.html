@@ -22,12 +22,12 @@
                 <select class="form-control"
                         id="author" multiple
                         th:name = "*{booksAuthors}">
-                    <th:block th:each=" bookAuthors :${book.booksAuthors}">
-                        <option th:each="author: ${authors}"
-                                th:selected="${author.id == bookAuthors.author.id}"
-                                th:value="${author.id}">[[${author.name}]]
+                    <!--<th:block th:each=" bookAuthors :${book.booksAuthors}">-->
+                        <option th:each="author: ${authors}" th:value="${author.id}">
+                            [[${author.name}]]
                         </option>
-                    </th:block>
+                    <!--th:selected="${author.id == bookAuthors.author.id}"-->
+                     <!--</th:block>-->
                 </select>
             </div>
             <span th:errors="*{booksAuthors}" th:if="${#fields.hasErrors('booksAuthors')}"></span>
