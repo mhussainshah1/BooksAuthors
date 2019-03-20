@@ -31,7 +31,6 @@
                 <td th:text = "${book.SKU}"></td>
                 <td>
                     <a th:href="@{/detail/{id}(id=${book.id})}">[[${book.title}]]</a>
-                    <span th:errors="${authorbooks}" th:if="${#fields.hasErrors('authorbooks')}"></span>
                 </td>
                 <td th:text = "${book.description}"></td>
                 <td th:text = "${book.price}"></td>
@@ -40,12 +39,10 @@
                     <span th:unless="${book.inStock}">No</span>
                 </td>
                 <td>
-                    <a th:href="@{/update/{id}(id=${book.id})}">Edit</a> -
+                    <a th:href="@{/update/{id}(id=${book.id})}">Edit</a>-
                     <a th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
                 </td>
-                <td></td>
             </tr>
-
         </table>
     </form>
 </div>

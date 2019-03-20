@@ -63,16 +63,12 @@ public class AuthorController {
     }
 
     @RequestMapping("/deleteauthor/{id}")
-    public String deleteAuthor(@PathVariable("id") long id, @Valid Book book, BindingResult result, Model model){
-        if(result.hasErrors()){
-            model.addAttribute("authors", authorRepository.findAll());
-            return "authorlist";
-        }
-//        Author author = authorRepository.findById(id).get();
-//        for(Book book :author.getBooks()){
-//            long book_id = book.getId();
+    public String deleteAuthor(@PathVariable("id") long id){
+        Author author = authorRepository.findById(id).get();
+        for(Book book :author.getBooks()){
+            long book_id = book.getId();
 //            bookRepository.deleteById(book_id);
-//        }
+        }
         authorRepository.deleteById(id);
         return "redirect:/authorlist";
     }
