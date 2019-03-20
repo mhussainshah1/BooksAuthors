@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @Controller
 public class BookController {
@@ -69,6 +70,16 @@ public class BookController {
             bookRepository.deleteById(id);
         }
         return "redirect:/";
+    }
+
+    @PostMapping("/search")
+    public String searchword(Model model, @RequestParam String search) {
+        String searchlike = "%" +search + "%";
+        ArrayList<Book> results = (ArrayList<Book>)
+                bookRepository.findAllByTitleLikeIgnoreCaseOrDescriptionContainingIgnoreCase(searchlike, searchlike);
+        model.addAttribute("books", results);
+        model.addAttribute("authors", authorRepository.findAll());
+        return "list";
     }
 
     @GetMapping("/about")
