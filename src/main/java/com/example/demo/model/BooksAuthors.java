@@ -14,7 +14,6 @@ public class BooksAuthors {
     @ManyToOne
     private Author author;
 
-
     public BooksAuthors() {
         book = new Book();
         author = new Author();

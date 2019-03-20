@@ -21,7 +21,7 @@
             <div class="col-sm-10">
                 <select class="form-control"
                         id="author" multiple
-                        th:field = "*{booksAuthors}">
+                        th:name = "*{booksAuthors}">
                     <th:block th:each=" bookAuthors :${book.booksAuthors}">
                         <option th:each="author: ${authors}"
                                 th:selected="${author.id == bookAuthors.author.id}"
