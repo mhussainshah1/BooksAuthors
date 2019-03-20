@@ -76,7 +76,7 @@ public class BookController {
     public String searchword(Model model, @RequestParam String search) {
         String searchlike = "%" +search + "%";
         ArrayList<Book> results = (ArrayList<Book>)
-                bookRepository.findAllByTitleLikeIgnoreCaseOrDescriptionContainingIgnoreCase(searchlike, searchlike);
+                bookRepository.findAllByTitleLikeIgnoreCaseOrDescriptionLikeIgnoreCase(searchlike, searchlike);
         model.addAttribute("books", results);
         model.addAttribute("authors", authorRepository.findAll());
         return "list";

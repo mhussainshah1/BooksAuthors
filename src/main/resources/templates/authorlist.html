@@ -9,7 +9,7 @@
 <div th:replace="base::nav"></div>
 <br/>
 <div class="container-float">
-    <form action="#" th:action= "@{/delete}" method="post">
+    <form action="#" th:action= "@{/deleteauthor}" method="post">
         <div class="jumbotron lead">
             <h2 align="center" th:text="'Author ' + ${author.name}"></h2>
         </div>
@@ -31,6 +31,7 @@
                 <td th:text = "${book.SKU}"></td>
                 <td>
                     <a th:href="@{/detail/{id}(id=${book.id})}">[[${book.title}]]</a>
+                    <span th:errors="${authorbooks}" th:if="${#fields.hasErrors('authorbooks')}"></span>
                 </td>
                 <td th:text = "${book.description}"></td>
                 <td th:text = "${book.price}"></td>
@@ -39,10 +40,12 @@
                     <span th:unless="${book.inStock}">No</span>
                 </td>
                 <td>
-                    <a th:href="@{/update/{id}(id=${book.id})}">Edit</a>-
+                    <a th:href="@{/update/{id}(id=${book.id})}">Edit</a> -
                     <a th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
                 </td>
+                <td></td>
             </tr>
+
         </table>
     </form>
 </div>

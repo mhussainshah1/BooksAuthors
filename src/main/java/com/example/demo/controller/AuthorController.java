@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Author;
 import com.example.demo.model.AuthorRepository;
+import com.example.demo.model.Book;
 import com.example.demo.model.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,12 +63,21 @@ public class AuthorController {
     }
 
     @RequestMapping("/deleteauthor/{id}")
-    public String deleteAuthor(@PathVariable("id") long id){
+    public String deleteAuthor(@PathVariable("id") long id, @Valid Book book, BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("authors", authorRepository.findAll());
+            return "authorlist";
+        }
+//        Author author = authorRepository.findById(id).get();
+//        for(Book book :author.getBooks()){
+//            long book_id = book.getId();
+//            bookRepository.deleteById(book_id);
+//        }
         authorRepository.deleteById(id);
         return "redirect:/authorlist";
     }
 
-    @RequestMapping("/deleteauthor")
+    @PostMapping("/deleteauthor")
     public String deleteAuthors(@RequestParam("check") long[] ids){
         for(long id : ids){
             authorRepository.deleteById(id);
