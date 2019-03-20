@@ -21,13 +21,13 @@
             <div class="col-sm-10">
                 <select class="form-control"
                         id="author" multiple
-                        th:field = "*{booksAuthors}">
+                        th:name = "*{booksAuthors}">
                     <!--<th:block th:each=" bookAuthors :${book.booksAuthors}">-->
-                        <option th:each="author: ${authors}"
-                                th:value="${author.id}">[[${author.name}]]
-                            <!--th:selected="${author.id == bookAuthors.author.id}"-->
+                        <option th:each="author: ${authors}" th:value="${author.id}">
+                            [[${author.name}]]
                         </option>
-                    <!--</th:block>-->
+                    <!--th:selected="${author.id == bookAuthors.author.id}"-->
+                     <!--</th:block>-->
                 </select>
             </div>
             <span th:errors="*{booksAuthors}" th:if="${#fields.hasErrors('booksAuthors')}"></span>
