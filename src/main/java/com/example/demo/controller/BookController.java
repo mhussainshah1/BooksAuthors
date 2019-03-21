@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Author;
 import com.example.demo.model.AuthorRepository;
 import com.example.demo.model.Book;
 import com.example.demo.model.BookRepository;
@@ -74,9 +75,8 @@ public class BookController {
 
     @PostMapping("/search")
     public String searchword(Model model, @RequestParam String search) {
-        String searchlike = "%" +search + "%";
         ArrayList<Book> results = (ArrayList<Book>)
-                bookRepository.findAllByTitleLikeIgnoreCaseOrDescriptionLikeIgnoreCase(searchlike, searchlike);
+                bookRepository.findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(search,search);
         model.addAttribute("books", results);
         model.addAttribute("authors", authorRepository.findAll());
         return "list";
