@@ -76,7 +76,7 @@ public class BookController {
     @PostMapping("/search")
     public String searchword(Model model, @RequestParam String search) {
         ArrayList<Book> results = (ArrayList<Book>)
-                bookRepository.findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(search,search);
+                bookRepository.findAllByTitleContainingOrDescriptionContainingAllIgnoreCase(search,search);
         model.addAttribute("books", results);
         model.addAttribute("authors", authorRepository.findAll());
         return "list";
